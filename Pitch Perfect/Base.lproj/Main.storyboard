@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="zQk-vV-MgC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -30,8 +31,7 @@
                                         <exclude reference="xPi-gO-03a"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="260" y="94" width="100" height="100"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="30o-Zs-DNq"/>
                                         <include reference="xPi-gO-03a"/>
@@ -61,8 +61,7 @@
                                         <exclude reference="gXj-hl-FAx"/>
                                     </mask>
                                 </variation>
-                                <variation key="widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="30" y="94" width="100" height="100"/>
+                                <variation key="widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="L3T-br-Mhm"/>
                                         <include reference="gXj-hl-FAx"/>
@@ -89,12 +88,12 @@
                                 <exclude reference="zBk-Fz-gc2"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="4i8-UE-M2b"/>
-                                <exclude reference="MCi-FH-qj7"/>
+                                <exclude reference="gU1-aI-mba"/>
+                                <exclude reference="r4A-rf-C87"/>
                                 <exclude reference="3j9-NS-LXw"/>
                                 <exclude reference="LUC-nQ-dCF"/>
-                                <exclude reference="r4A-rf-C87"/>
-                                <exclude reference="gU1-aI-mba"/>
+                                <exclude reference="4i8-UE-M2b"/>
+                                <exclude reference="MCi-FH-qj7"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
@@ -104,12 +103,12 @@
                                 <include reference="zBk-Fz-gc2"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="4i8-UE-M2b"/>
-                                <include reference="MCi-FH-qj7"/>
+                                <include reference="gU1-aI-mba"/>
+                                <include reference="r4A-rf-C87"/>
                                 <include reference="3j9-NS-LXw"/>
                                 <include reference="LUC-nQ-dCF"/>
-                                <include reference="r4A-rf-C87"/>
-                                <include reference="gU1-aI-mba"/>
+                                <include reference="4i8-UE-M2b"/>
+                                <include reference="MCi-FH-qj7"/>
                             </mask>
                         </variation>
                     </view>
@@ -153,7 +152,6 @@
                                 <state key="normal" image="stop@2x-iphone"/>
                                 <connections>
                                     <action selector="stopRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rxz-jH-Xis"/>
-                                    <segue destination="jHO-KR-CTz" kind="show" id="yO3-MI-CNK"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -202,6 +200,7 @@
                         <outlet property="recordButton" destination="tod-hp-1FI" id="lzu-Tg-EKO"/>
                         <outlet property="recordingText" destination="Sof-P8-CLb" id="s0q-wJ-VRm"/>
                         <outlet property="stopButton" destination="8tp-Cf-oGV" id="2qw-fx-3pG"/>
+                        <segue destination="jHO-KR-CTz" kind="show" identifier="stopRecording" id="gYM-cA-91u"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

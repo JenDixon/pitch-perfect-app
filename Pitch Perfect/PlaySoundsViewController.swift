@@ -15,38 +15,26 @@ class PlaySoundsViewController: UIViewController {
     @IBOutlet weak var PlaySoundsFast: UIButton!
     @IBOutlet weak var StopAudio: UIButton!
     
-    var quotePlayer: AVAudioPlayer?
-    
-    func setupAudioPlayerWithFile(file:NSString, type:NSString) -> AVAudioPlayer? {
-        let path = NSBundle.mainBundle().pathForResource(file as String, ofType: type as String)
-        let url = NSURL.fileURLWithPath(path!)
-        
-        var audioPlayer:AVAudioPlayer?
-        
-        do {
-            try audioPlayer = AVAudioPlayer(contentsOfURL: url)
-            audioPlayer?.enableRate = true
-
-        } catch {
-            print("Player not available")
-        }
-        return audioPlayer
-    }
+    var quotePlayer: AVAudioPlayer!
+    var receivedAudio: RecordedAudio!
     
     func playSounds(rate: Float) {
         quotePlayer!.stop()
         quotePlayer!.rate = rate
-        //quotePlayer1.currentTime = 0.0
-        //start from the beginning
         quotePlayer!.play()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let quotePlayer = self.setupAudioPlayerWithFile("gump_quote", type: "mp3"){
-            self.quotePlayer = quotePlayer
-        }
+        try! quotePlayer = AVAudioPlayer(contentsOfURL: receivedAudio!.filePathUrl)
+        quotePlayer.enableRate = true
+
+        
+        
+//        if let quotePlayer = self.setupAudioPlayerWithFile("gump_quote", type: "mp3"){
+//            self.quotePlayer = quotePlayer
+//        }
         
 
         // Do any additional setup after loading the view.
