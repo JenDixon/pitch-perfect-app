@@ -24,9 +24,16 @@ class PlaySoundsViewController: UIViewController {
     var audioFile:AVAudioFile!
     
     func playSounds(rate: Float) {
+        resetAudioEngine()
+
         quotePlayer!.stop()
         quotePlayer!.rate = rate
         quotePlayer!.play()
+    }
+    
+    func resetAudioEngine(){
+        audioEngine.stop()
+        audioEngine.reset()
     }
     
     override func viewDidLoad() {
@@ -45,29 +52,24 @@ class PlaySoundsViewController: UIViewController {
     
     
     @IBAction func playSoundsSlowly(sender: UIButton) {
-        audioEngine.stop()
-        audioEngine.reset()
         self.playSounds(0.5)
     }
     
     @IBAction func playSoundsFast(sender: UIButton) {
-        audioEngine.stop()
-        audioEngine.reset()
         self.playSounds(1.5)
     }
     
     @IBAction func playChipmunkAudio(sender: UIButton) {
-        playAudioWithVariablePitch(1000)
+        playAudioWithVariablePitch(1000, reverb: 50.0)
     }
     
     @IBAction func playDarthVaderAudio(sender: UIButton) {
-        playAudioWithVariablePitch(-1000)
+        playAudioWithVariablePitch(-1000, reverb: 50.0)
     }
     
-    func playAudioWithVariablePitch(pitch: Float){
+    func playAudioWithVariablePitch(pitch: Float, reverb: Float){
         quotePlayer.stop()
-        audioEngine.stop()
-        audioEngine.reset()
+        resetAudioEngine()
         
         let audioPlayerNode = AVAudioPlayerNode()
         audioEngine.attachNode(audioPlayerNode)
@@ -76,8 +78,14 @@ class PlaySoundsViewController: UIViewController {
         changePitchEffect.pitch = pitch
         audioEngine.attachNode(changePitchEffect)
         
+        let reverbEffect = AVAudioUnitReverb()
+        reverbEffect.loadFactoryPreset(AVAudioUnitReverbPreset.Cathedral)
+        reverbEffect.wetDryMix = reverb
+        audioEngine.attachNode(reverbEffect)
+        
         audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
-        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        audioEngine.connect(changePitchEffect, to: reverbEffect, format: nil)
+        audioEngine.connect(reverbEffect, to: audioEngine.outputNode, format: nil)
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler: nil)
         try! audioEngine.start()
